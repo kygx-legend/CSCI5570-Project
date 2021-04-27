@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.3.0)
-project(csci5570-project)
+project(pontux)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/release/)
 
