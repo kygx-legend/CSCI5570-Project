@@ -8,7 +8,7 @@
 #include "config.h"
 #include "build.h"
 
-#define CHECK_PPR_VALUES 1
+//#define CHECK_PPR_VALUES 1
 // #define CHECK_TOP_K_PPR 1
 #define PRINT_PRECISION_FOR_DIF_K 1
 // std::mutex mtx;
@@ -839,11 +839,11 @@ double estimated_random_walk_cost(double rsum, double rmax){
 }
 //map<double, int> count_ratio;
 void fora_query_basic(int v, const Graph& graph){
-    Timer timer(FORA_QUERY);
+    //Timer timer(FORA_QUERY);
     double rsum = 1.0;
 
     {
-        Timer timer(FWD_LU);
+        //Timer timer(FWD_LU);
 
         if(config.balanced){
             static vector<int> forward_from;
@@ -888,8 +888,8 @@ void fora_query_basic(int v, const Graph& graph){
         //forward_local_update_linear_with_prune(v, graph, rsum, config.rmax); 
     }
 
-    INFO(config.omega, config.omega*rsum, rsum);
-    std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
+    //INFO(config.omega, config.omega*rsum, rsum);
+    //std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
     //return;
     if(config.opt){
         compute_ppr_with_fwdidx_opt(graph, rsum);
@@ -898,8 +898,8 @@ void fora_query_basic(int v, const Graph& graph){
         compute_ppr_with_fwdidx(graph, rsum);
         total_rsum+= rsum*(1-config.alpha);
     }
-    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() - startTime).count();
-    INFO("Total random walk time: ", duration/TIMES_PER_SEC);
+    //auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() - startTime).count();
+    //INFO("Total random walk time: ", duration/TIMES_PER_SEC);
 
 #ifdef CHECK_PPR_VALUES
     write_ppr(v);
@@ -1421,7 +1421,6 @@ void query(Graph& graph){
     INFO(query_size);
     int used_counter=0;
 
-    INFO("Block");
     unsigned int avg_size = query_size / config.size;
     unsigned int start = avg_size * config.rank;
     unsigned int end = avg_size * config.rank + avg_size;
@@ -1478,12 +1477,12 @@ void query(Graph& graph){
         // rw_counter.initialize(graph.n);
         for(int i=start; i<end; i++){
             int source =  queries[i];
-            cout << i+1 <<". source node:" << source << endl;
+            //cout << i+1 <<". source node:" << source << endl;
             fora_query_basic(source, graph);
-            split_line();
+            //split_line();
         }
         double avg_rsum = total_rsum/query_size;
-        INFO(avg_rsum*config.omega);
+        //INFO(avg_rsum*config.omega);
         /*for(auto x: count_ratio){
             INFO(x.first, x.second);
         }*/

@@ -375,8 +375,8 @@ inline void write_ppr(int v){
         boost::filesystem::create_directories(dir);
     }
     ofstream of;
-    of.open(config.exe_result_dir + "/execution/res.txt" + std::to_string(config.rank), ios::out | ios::app);
-    //of.open("res.txt", ios::out | ios::app | ios::bin);
+    //of.open(config.exe_result_dir + "/execution/res.txt" + std::to_string(config.rank), ios::out | ios::app);
+    of.open(config.exe_result_dir + "/execution/res.txt" + std::to_string(config.rank), ios::out | ios::app | ios::binary);
     of << v << endl;
     for(int i=0; i< ppr.occur.m_num; i++){
       if (ppr[ppr.occur[i]] != 0) {
