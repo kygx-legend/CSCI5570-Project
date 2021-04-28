@@ -1417,9 +1417,17 @@ void query(Graph& graph){
     vector<int> queries;
     load_ss_query(queries);
     unsigned int query_size = queries.size();
-    query_size = min( query_size, config.query_size );
+    //query_size = min( query_size, config.query_size );
     INFO(query_size);
     int used_counter=0;
+
+    INFO("Block");
+    unsigned int avg_size = query_size / config.size;
+    unsigned int start = avg_size * config.rank;
+    unsigned int end = avg_size * config.rank + avg_size;
+    INFO(avg_size);
+    INFO(start);
+    INFO(end);
 
     assert(config.rmax_scale >= 0);
     INFO(config.rmax_scale);
@@ -1468,7 +1476,7 @@ void query(Graph& graph){
 
 
         // rw_counter.initialize(graph.n);
-        for(int i=0; i<query_size; i++){
+        for(int i=start; i<end; i++){
             int source =  queries[i];
             cout << i+1 <<". source node:" << source << endl;
             fora_query_basic(source, graph);
@@ -1486,7 +1494,7 @@ void query(Graph& graph){
 
         rw_counter.initialize(graph.n);
 
-        for(int i=0; i<query_size; i++){
+        for(int i=start; i<end; i++){
             cout << i+1 <<". source node:" << queries[i] << endl;
             montecarlo_query(queries[i], graph);
             split_line();

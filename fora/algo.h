@@ -371,10 +371,10 @@ inline void display_ppr(){
 
 inline void write_ppr(int v){
     ofstream of;
-    of.open("res.txt", ios::out | ios::app);
+    of.open("res.txt" + std::to_string(config.rank), ios::out | ios::app);
     //of.open("res.txt", ios::out | ios::app | ios::bin);
+    of << v << endl;
     for(int i=0; i< ppr.occur.m_num; i++){
-      of << v << endl;
       if (ppr[ppr.occur[i]] != 0) {
         of << ppr.occur[i] << "-" << ppr[ ppr.occur[i] ] << endl;
       }
