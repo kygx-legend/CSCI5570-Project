@@ -370,8 +370,12 @@ inline void display_ppr(){
 }
 
 inline void write_ppr(int v){
+    if(!boost::filesystem::exists(config.exe_result_dir + "/execution")){
+        boost::filesystem::path dir(config.exe_result_dir + "/execution");
+        boost::filesystem::create_directories(dir);
+    }
     ofstream of;
-    of.open("res.txt" + std::to_string(config.rank), ios::out | ios::app);
+    of.open(config.exe_result_dir + "/execution/res.txt" + std::to_string(config.rank), ios::out | ios::app);
     //of.open("res.txt", ios::out | ios::app | ios::bin);
     of << v << endl;
     for(int i=0; i< ppr.occur.m_num; i++){
