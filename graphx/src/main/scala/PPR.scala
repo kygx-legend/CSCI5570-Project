@@ -19,7 +19,7 @@ object PPR {
     // Load the edges as a graph
     val graph = GraphLoader.edgeListFile(sc, "hdfs://master:9000" + graph_file)
     // Select source vertices
-    val vertices: Array[VertexId] = range(0, 1000).asInstanceOf[Array[VertexId]]
+    val vertices: Array[VertexId] = range(0, 100).map(i => i.toLong)
     val ranks = graph.staticParallelPersonalizedPageRank(vertices, 10, 0.2)
 
     ranks.edges.foreach(println)

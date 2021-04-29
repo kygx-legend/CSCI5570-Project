@@ -2,8 +2,8 @@
 
 Acknowledgement:
 
-KnightKing is cloned from https://github.com/KnightKingWalk/KnightKing.git.
-FORA is cloned from and integrated with MPICH.
+1. KnightKing is cloned from https://github.com/KnightKingWalk/KnightKing.git.
+2. FORA is cloned from https://github.com/wangsibovictor/fora.git and integrated with MPICH.
 
 ### GraphX
 
