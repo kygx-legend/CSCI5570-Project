@@ -1,21 +1,28 @@
 import org.apache.spark._
 import org.apache.spark.graphx._
 
+import Array._
+
 object PPR {
   def main(args: Array[String]) {
     val conf = new SparkConf().setAppName("PPR")
     val sc = new SparkContext(conf)
 
-    print(args(0));
-    print(args(1));
+    if (args.length != 1) {
+      println("no parameter")
+      return
+    }
     
-    return
+    println(args(0))
+    val graph_file = args(0)
 
     // Load the edges as a graph
-    val graph = GraphLoader.edgeListFile(sc, "data/graphx/followers.txt")
+    val graph = GraphLoader.edgeListFile(sc, "hdfs://master:9000" + graph_file)
     // Select source vertices
-    val vertices: Array[VertexId] = Array((0), (1), (2))
+    val vertices: Array[VertexId] = range(0, 1000).asInstanceOf[Array[VertexId]]
     val ranks = graph.staticParallelPersonalizedPageRank(vertices, 10, 0.2)
 
+    ranks.edges.foreach(println)
+    return
   }
 }
