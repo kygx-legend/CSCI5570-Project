@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import os
 import sys
@@ -64,7 +65,7 @@ def start_on_worker(worker_host, worker_path, is_stop, interval = 1):
         os.system('ssh %s "mkdir -p %s"' % (worker_host, worker_path))
 
         # Start collectl
-        os.system('ssh {0} "collectl -scdmn -i {1} -f {2}/ 2>/dev/null & echo \$! > collectl.pid && wait \$!" &'.format(
+        os.system('ssh {0} "collectl --rawtoo -scdmn -i {1} -f {2}/ 2>/dev/null & echo \$! > collectl.pid && wait \$!" &'.format(
             worker_host,
             interval,
             worker_path

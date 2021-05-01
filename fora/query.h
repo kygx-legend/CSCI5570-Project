@@ -834,7 +834,7 @@ double estimated_random_walk_cost(double rsum, double rmax){
             estimated_random_walk_cost = config.omega*rsum*(1-config.alpha)*random_walk_index_time;
         }
     }
-    INFO(rmax, config.rmax, estimated_random_walk_cost);
+    //INFO(rmax, config.rmax, estimated_random_walk_cost);
     return estimated_random_walk_cost;
 }
 //map<double, int> count_ratio;
@@ -862,22 +862,22 @@ void fora_query_basic(int v, const Graph& graph){
             double rmax = 0;
             rmax = config.rmax*8;
             double random_walk_cost = 0;
-            INFO(graph.g[v].size()>0);
+            //INFO(graph.g[v].size()>0);
             if(graph.g[v].size()>0){
                 while(estimated_random_walk_cost(rsum, rmax)> used_time){
-                    INFO(config.omega*rsum*random_walk_time, used_time);
+                    //INFO(config.omega*rsum*random_walk_time, used_time);
                     std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
                     forward_local_update_linear_topk( v, graph, rsum, rmax, lowest_delta_rmax, forward_from ); 
                     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() - startTime).count();
-                    INFO(rsum);
+                    //INFO(rsum);
                     used_time +=duration/TIMES_PER_SEC;
                     double used_time_this_iteration = duration/TIMES_PER_SEC;
-                    INFO(used_time_this_iteration);
+                    //INFO(used_time_this_iteration);
                     rmax /=2;
                 }
                 rmax*=2;
-                INFO("Adpaitve total forward push time: ", used_time);
-                INFO(config.rmax, rmax, config.rmax/rmax);
+                //INFO("Adpaitve total forward push time: ", used_time);
+                //INFO(config.rmax, rmax, config.rmax/rmax);
                 //count_ratio[config.rmax/rmax]++;
             }else{
                 forward_local_update_linear(v, graph, rsum, config.rmax);

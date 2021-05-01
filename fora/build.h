@@ -193,7 +193,7 @@ bool sort_by_sec_descending(const std::pair<int, int> &left, const std::pair<int
 
 inline void deserialize_idx(){
     string file_name = get_idx_file_name();
-    INFO("Index file name:",file_name);
+    //INFO("Index file name:",file_name);
     assert_file_exist("index file", file_name);
     std::ifstream ifs(file_name);
     boost::archive::binary_iarchive ia(ifs);

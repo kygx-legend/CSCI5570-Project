@@ -125,6 +125,8 @@ def preprocess(in_files, raw_input):
     preprocessed = []
     cmd = ""
     for in_file in in_files:
+        if in_file.endswith('tab.gz'):
+            continue
         out_file = os.path.basename(in_file).split('.')[0]
         cmd = "{3} echo 'Save preprocessed file {2} to {4}' && collectl -p {0} -P -oU -scdmn --sep 9 > {1}/{2} &".format(in_file, raw_input, out_file, cmd, os.path.relpath(raw_input))
         preprocessed.append(os.path.join(raw_input, out_file))
